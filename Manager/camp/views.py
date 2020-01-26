@@ -1,21 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import request, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from camp.forms import UserForm
 from .models import CampData
+from django.core.mail import send_mail
 
 def index(request):
     qs = CampData.objects.all()
     context = {"data": qs}
     return render(request, 'index.html', context)
 
-@csrf_exempt
+
 @login_required
 def add_rule(request):
     qs = CampData.objects.all()
+    context = {"queryset": qs}
     campdata = CampData()
     if request.method == 'POST':
         campdata.rule_name = request.POST.get('rule_name')
@@ -30,11 +31,62 @@ def add_rule(request):
         campdata.installs = request.POST.get('installs')
         campdata.eCPI = request.POST.get('eCPI')
         campdata.status = request.POST.get('status')
-    campdata.save()
-    context = {
-        "queryset": qs
-    }
-    return render(request, 'add_rule.html', context)
+        campdata.save()
+        return redirect('/')
+    else:
+        return render(request, 'add_rule.html', context)
+
+"""
+campdata.rule_name = request.POST.get('rule_name')
+campdata.campaigns = request.POST.get('campaign_name')
+campdata.schedule_start = request.POST.get('schedule_start')
+campdata.schedule_stop = request.POST.get('schedule_stop')
+campdata.impressions = request.POST.get('impressions')
+campdata.clicks = request.POST.get('clicks')
+campdata.spend = request.POST.get('spend')
+campdata.eCPM = request.POST.get('eCPM')
+campdata.eCPC = request.POST.get('eCPC')
+campdata.installs = request.POST.get('installs')
+campdata.eCPI = request.POST.get('eCPI')
+campdata.status = request.POST.get('status')
+campdata.save()
+"""
+def send_notification(subject):
+    send_mail(['Notification'], [subject], ['inbox.kapil@outlook.com'],
+    ['inbox.pawar@gmail.com'], fail_silently = False)
+
+def criteria():
+    qs = CampData.objects.all()
+    if qs.schedule_stop != '' and qs.schedule_stop <= datetime.now():
+        status = False
+        subject = 'Scheduled To Stop'
+        send_notification(subject)
+    if qs.impressions != '' and qs.impressions <= impressions:
+        status = False
+        subject = 'Impressions Low'
+        send_notification(subject)
+    if qs.clicks != '' and qs.clicks <= clicks:
+        status = False
+        subject = 'No of Clicks Low'
+        send_notification(subject)
+    if qs.eCPM != '' and qs.eCPM <= eCPM:
+        status = False
+        subject = 'eCPM Low'
+        send_notification(subject)
+    if qs.eCPC != '' and qs.eCPC <= eCPC:
+        status = False
+        subject = 'eCPC Low'
+        send_notification(subject)
+    if qs.installs != '' and qs.installs <= installs:
+        status = False
+        subject = 'Installs Low'
+        send_notification(subject)
+    if qs.eCPI != '' and qs.eCPI <= eCPI:
+        status = False
+        subject = 'eCPI Low'
+        send_notification(subject)
+
+
 
 @login_required
 def special(request):

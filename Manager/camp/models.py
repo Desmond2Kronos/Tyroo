@@ -8,7 +8,7 @@ class UserProfileInfo(models.Model):
         return self.user.username
 
 class CampData(models.Model):
-    rule_name = models.CharField(max_length = 50)
+    rule_name = models.CharField(max_length = 50, blank = False)
     campaigns = models.CharField(max_length = 50)
     schedule_start = models.DateTimeField(auto_now_add=True, blank=True)
     schedule_stop = models.DateTimeField(auto_now_add=True, blank=True)
