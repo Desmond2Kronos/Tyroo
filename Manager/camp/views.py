@@ -1,12 +1,36 @@
 from django.shortcuts import render
 from django.http import request, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from camp.forms import UserForm
+from camp.models import CampData
 
 def index(request):
     return render(request, 'index.html')
+
+@csrf_exempt
+@login_required
+def add_rule(request):
+    #qs = CampData.objects.all()
+    campdata = CampData()
+    if request.method == 'POST':
+        campdata.rule_name = request.POST.get('rule_name')
+        campdata.campaigns = request.POST.get('campaign_name')
+        campdata.schedule_start = request.POST.get('schedule_start')
+        campdata.schedule_stop = request.POST.get('schedule_stop')
+        campdata.impressions = request.POST.get('impressions')
+        campdata.clicks = request.POST.get('clicks')
+        campdata.spend = request.POST.get('spend')
+        campdata.eCPM = request.POST.get('eCPM')
+        campdata.eCPC = request.POST.get('eCPC')
+        campdata.installs = request.POST.get('installs')
+        campdata.eCPI = request.POST.get('eCPI')
+        campdata.status = request.POST.get('status')
+    campdata.save()
+    #context = {'queryset': qs}
+    return render(request, 'add_rule.html', {})
 
 @login_required
 def special(request):

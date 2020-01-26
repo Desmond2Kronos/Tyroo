@@ -1,1 +1,56 @@
-<h1>Add Rules here</h1>
+{% extends "base.html" %}
+{% block body_block %}
+<form method = 'POST', action = "." >
+
+  <div class="form-group">
+    <label for="rule_name">Rule Name</label>
+    <input type="text" name = "rule_name" required="required" class="form-control" id="rule_name" placeholder="Enter Rule Name">
+  </div>
+  <div class="form-group">
+    <label for="camp_name">Campaign Name</label>
+    <input type="text" name = "campaign_name" class="form-control" id="camp_name" placeholder="Enter Campaign Name">
+  </div>
+  <div class="form-group">
+    <label for="schedule">Schedule Start</label>
+    <input type="datetime-local" required="required" name = "schedule_start" class="form-control" id="schedule" placeholder="">
+  </div>
+  <div class="form-group">
+    <label for="schedule">Schedule Stop</label>
+    <input type="datetime-local" required="required" name = "schedule_stop" class="form-control" id="schedule" placeholder="">
+  </div>
+  <div class="form-group">
+    <label for="eCPM">eCPM</label>
+    <input type="number" name = "eCPM" class="form-control" id="eCPM" placeholder="0.0">
+  </div>
+  <div class="form-group">
+    <label for="impressions">Impressions</label>
+    <input type="number" name = "impressions"  class="form-control" id="impressions" placeholder="0.0">
+  </div>
+  <div class="form-group">
+    <label for="spend">Spend</label>
+    <input type="number" name = "spend"  class="form-control" id="spend" placeholder="0.0">
+  </div>
+  <div class="form-group">
+    <label for="eCPC">eCPC</label>
+    <input type="number" name = "eCPC" class="form-control" id="eCPC" placeholder="0.0">
+  </div>
+  <div class="form-group">
+    <label for="clicks">Clicks</label>
+    <input type="number" name = "clicks" class="form-control" id="clicks" placeholder="0.0">
+  </div>
+  <div class="form-group">
+    <label for="installs">installs</label>
+    <input type="number" name = "installs" class="form-control" id="installs" placeholder="0.0">
+  </div>
+  <div class="form-group">
+    <label for="eCPI">eCPI</label>
+    <input type="number" name = "eCPI" class="form-control" id="eCPI" placeholder="0.0">
+</div>
+<div class="form-group">
+  <label for="status">Status: 0: Inactive 1: Active</label>
+  <input type="number" required = "required" name = "status" class="form-control" id="eCPI" placeholder="0.0">
+</div>
+
+<button type="submit" name = "submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

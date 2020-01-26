@@ -10,17 +10,16 @@ class UserProfileInfo(models.Model):
 class CampData(models.Model):
     rule_name = models.CharField(max_length = 50)
     campaigns = models.CharField(max_length = 50)
-    schedule_start = models.DateTimeField()
-    schedule_stop = models.DateTimeField()
-    impressions = models.IntegerField()
-    clicks = models.IntegerField()
-    spend = models.IntegerField()
-    eCPM = models.IntegerField()
-    eCPC = models.IntegerField()
-    installs = models.IntegerField()
-    eCPI = models.IntegerField()
-    action = models.CharField(max_length = 20)
-    status = models.BooleanField(default = True)
+    schedule_start = models.DateTimeField(auto_now_add=True, blank=True)
+    schedule_stop = models.DateTimeField(auto_now_add=True, blank=True)
+    impressions = models.IntegerField(default=1, blank=True)
+    clicks = models.IntegerField(default=1, blank=True)
+    spend = models.IntegerField(default=1, blank=True)
+    eCPM = models.IntegerField(default=1, blank=True)
+    eCPC = models.IntegerField(default=1, blank=True)
+    installs = models.IntegerField(default=1, blank=True, null = True)
+    eCPI = models.IntegerField(default=1, blank=True)
+    status = models.BooleanField(default=True, blank = True)
 
     def __str__(self):
         return self.rule_name
