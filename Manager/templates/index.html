@@ -1,19 +1,54 @@
 {% extends "base.html" %}
 {% block body_block %}
+
 <div class="container">
-  <div class="jumbotron">
+  <div class="jumbotdon">
     <h1>Welcome to the Manager !</h1>
     {% if user.is_authenticated %}
         <h2>Hello {{ user.username }}</h2>
         <div class="container">
-          <h3>Previous rules here</h3>
+          <h3>Previous rules are here</h3>
+          <div class="row">
+            <table class="table">
+              <tr>
+                <th>rule_name</th>
+                <th>campaigns</th>
+                <th>schedule_start</th>
+                <th>schedule_stop</th>
+                <th>impressions</th>
+                <th>clicks</th>
+                <th>spend</th>
+                <th>eCPM</th>
+                <th>eCPC</th>
+                <th>installs</th>
+                <th>eCPI</th>
+                <th>status</th>
+                <th>Edit</th>
+              </tr>
+              {% for rule in data %}
+              <tr>
+                <td>{{rule.rule_name}}</td>
+                <td>{{rule.campaigns}}</td>
+                <td>{{rule.schedule_start}}</td>
+                <td>{{rule.schedule_stop}}</td>
+                <td>{{rule.impressions}}</td>
+                <td>{{rule.clicks}}</td>
+                <td>{{rule.spend}}</td>
+                <td>{{rule.eCPM}}</td>
+                <td>{{rule.eCPC}}</td>
+                <td>{{rule.installs}}</td>
+                <td>{{rule.eCPI}}</td>
+                <td>{{rule.status}}</td>
+              </tr>
+              {% endfor %}
+            </table>
+        </div>
+        <div class="container">
+          <form action ="." method = 'GET'>
+            <button class ="btn btn-success" type="submit">Add Rule</button>
+          </form>
         </div>
 
-        <div class="container">
-          <input type="button" name = "add_rule"
-          onclick="location.href = '{% url 'camp:add_rule' %}'"
-          value="Add Rule" />
-        </div>
     {% else %}
         <h2>Register or Login if you'd like to</h2>
     {% endif %}
