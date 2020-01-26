@@ -13,9 +13,21 @@
           <input type="button" value="Add Rule" />
         </div>
         <form>
+          <div class="form-group">
+            <label for="rule_name">Rule Name</label>
+            <input type="text" class="form-control" id="rule_name" placeholder="Enter Rule Name">
+          </div>
   <div class="form-group">
     <label for="camp_name">Campaign Name</label>
     <input type="text" class="form-control" id="camp_name" placeholder="Enter Campaign Name">
+  </div>
+  <div class="form-group">
+    <label for="schedule">Schedule Start</label>
+    <input type="datetime-local" class="form-control" id="schedule" placeholder="">
+  </div>
+  <div class="form-group">
+    <label for="schedule">Schedule Stop</label>
+    <input type="datetime-local" class="form-control" id="schedule" placeholder="">
   </div>
   <div class="form-group">
     <label for="eCPM">eCPM</label>
@@ -45,6 +57,15 @@
     <label for="eCPI">eCPI</label>
     <input type="number" class="form-control" id="eCPI" placeholder="0.0">
   </div>
+  <!--
+  <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Action
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Notify</a>
+  </div>
+</div> -->
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
