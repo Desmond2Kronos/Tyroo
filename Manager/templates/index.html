@@ -23,6 +23,7 @@
                 <th>installs</th>
                 <th>eCPI</th>
                 <th>status</th>
+                <th>Edit</th>
               </tr>
               {% for rule in data %}
               <tr>
@@ -38,15 +39,23 @@
                 <td>{{rule.installs}}</td>
                 <td>{{rule.eCPI}}</td>
                 <td>{{rule.status}}</td>
+                <td>
+                  <a href="{% url 'camp:add_rule' %}">
+                    <button type="button" class="btn btn-default">
+                      <span>Edit</span>
+                    </button>
+                  </a>
               </tr>
               {% endfor %}
             </table>
         </div>
-        <div class="container">
-          <form action ="." method = 'GET'>
-            <button class ="btn btn-success" type="submit">Add Rule</button>
-          </form>
-        </div>
+
+      <a href="{% url 'camp:add_rule' %}">
+        <button type="button" class="btn btn-success">
+        <span>Add Rule</span>
+        </button>
+      </a>
+
 
     {% else %}
         <h2>Register or Login if you'd like to</h2>
