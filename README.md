@@ -1,15 +1,17 @@
-This is project was created using Django.
+<h2>This is project was created using Django.</h2>
+<ul>
+ <li>It has user authentication.</li>
+ <li>It has basic CRUD operations where the conditions(rules) can be added or deleted.</li>
+ <li>It has email notification sending utility (untested) that requires configuring settings.py to work.</li>
+</ul>
+<ul>
+ <li>EMAIL_HOST = ''</li>
+ <li>EMAIL_PORT = ''</li>
+ <li>EMAIL_HOST_USER = ''</li>
+ <li>EMAIL_HOST_PASSWORD = ''</li>
+ </ul>
 
-It has user authentication.
-It has basic CRUD operations where the conditions(rules) can be added or deleted.
-It has email notification sending utility (untested) that requires configuring settings.py to work.
-
-EMAIL_HOST = ''
-EMAIL_PORT = ''
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-
-I was not able to get the scheduler to work for the criteria(rules) given by the user.
+<h4>I was not able to get the scheduler to work for the criteria(rules) given by the user.</h4>
 
 
 
