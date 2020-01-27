@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate, login, logout
 from camp.forms import UserForm
 from .models import CampData, CampGatheredData
 from django.core.mail import send_mail
+import schedule
+import time
 
 import datetime
 
@@ -43,38 +45,42 @@ def send_notification(subject):
     send_mail(['subject'], ["The campaign is inactive"], ['sender@outlook.com'],
     ['receiver.pawar@gmail.com'], fail_silently = False)
 
+
+
+
 def criteria():
     qs = CampData.objects.all()
     ds = CampGatheredData.all()
-    impressions = ds.objects.get(metric = 'impressions')
-    if qs.schedule_stop != '' and qs.schedule_stop <= datetime.now():
-        status = False
+    if qs.schedule_stop != '' and qs.schedule_stop <= datetime.datetime.now():
+        qs.status = False
         subject = 'Scheduled To Stop'
         send_notification(subject)
     if qs.impressions != '' and qs.impressions !=0 and ds.impressions <= qs.impressions:
-        status = False
+        qs.status = False
         subject = 'Impressions Low'
         send_notification(subject)
     if qs.clicks != '' and qs.click !=0 and ds.clicks <= qs.clicks:
-        status = False
+        qs.status = False
         subject = 'No of Clicks Low'
         send_notification(subject)
     if qs.eCPM != '' and qs.eCPM !=0 and ds.eCPM <= qs.eCPM:
-        status = False
+        qs.status = False
         subject = 'eCPM Low'
         send_notification(subject)
     if qs.eCPC != '' and qs.eCPC !=0 and ds.eCPC <= qs.eCPC:
-        status = False
+        qs.status = False
         subject = 'eCPC Low'
         send_notification(subject)
     if qs.installs != '' and qs.installs != 0 and ds.installs <= qs.installs:
-        status = False
+        qs.status = False
         subject = 'Installs Low'
         send_notification(subject)
     if qs.eCPI != '' and qs.eCPI !=0 and qs.eCPI <= ds.eCPI:
-        status = False
+        qs.status = False
         subject = 'eCPI Low'
         send_notification(subject)
+
+schedule.every(15).minutes.do(criteria)
 
 @login_required
 def edit_rule(request):

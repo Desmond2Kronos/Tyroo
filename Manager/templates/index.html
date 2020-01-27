@@ -23,7 +23,6 @@
                 <th>installs</th>
                 <th>eCPI</th>
                 <th>status</th>
-                <th>Edit</th>
                 <th>Delete</th>
               </tr>
               {% for rule in data %}
@@ -40,10 +39,6 @@
                 <td>{{rule.installs}}</td>
                 <td>{{rule.eCPI}}</td>
                 <td>{{rule.status}}</td>
-                <td>
-                  <a class="btn btn-warning" href="{% url 'camp:edit_rule' %}">
-                    Edit</a>
-                </td>
                 <td>
                   <a class="btn btn-danger" href="{% url 'camp:delete_rule' rule.id %}">
                     Delete</a>
