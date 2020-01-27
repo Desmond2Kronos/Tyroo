@@ -40,12 +40,13 @@ def add_rule(request):
         return render(request, 'add_rule.html', context)
 
 def send_notification(subject):
-    send_mail(['Subject'], ["The campaign is inactive"], ['inbox.kapil@outlook.com'],
-    ['inbox.pawar@gmail.com'], fail_silently = False)
+    send_mail(['subject'], ["The campaign is inactive"], ['sender@outlook.com'],
+    ['receiver.pawar@gmail.com'], fail_silently = False)
 
 def criteria():
     qs = CampData.objects.all()
     ds = CampGatheredData.all()
+    impressions = ds.objects.get(metric = 'impressions')
     if qs.schedule_stop != '' and qs.schedule_stop <= datetime.now():
         status = False
         subject = 'Scheduled To Stop'
@@ -76,30 +77,12 @@ def criteria():
         send_notification(subject)
 
 @login_required
-def edit_rule(request, rule_name):
-    rule = request.objects.get(rule_name = rule_name)
-    print(rule)
-    if request.method == 'POST':
-        rule.rule_name = request.POST.get('rule_name')
-        rule.campaigns = request.POST.get('campaign_name')
-        rule.schedule_start = request.POST.get('schedule_start')
-        rule.schedule_stop = request.POST.get('schedule_stop')
-        rule.impressions = request.POST.get('impressions')
-        rule.clicks = request.POST.get('clicks')
-        rule.spend = request.POST.get('spend')
-        rule.eCPM = request.POST.get('eCPM')
-        rule.eCPC = request.POST.get('eCPC')
-        rule.installs = request.POST.get('installs')
-        rule.eCPI = request.POST.get('eCPI')
-        rule.status = request.POST.get('status')
-        rule.save()
-        return redirect('/')
-    else:
-        return render(request, 'add_rule.html', context)
+def edit_rule(request):
+    return render(request, 'add_rule.html')
 
 @login_required
-def delete_rule(request, rule_name):
-    rule = CampData.objects.get('rule_name')
+def delete_rule(request, id):
+    rule = CampData.objects.get(id = id)
     rule.delete()
     return redirect('/')
 

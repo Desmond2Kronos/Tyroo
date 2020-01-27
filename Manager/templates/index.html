@@ -41,18 +41,12 @@
                 <td>{{rule.eCPI}}</td>
                 <td>{{rule.status}}</td>
                 <td>
-                  <a href="{% url 'camp:edit_rule' %}">
-                    <button type="button" class="btn btn-default">
-                      <span>Edit</span>
-                    </button>
-                  </a>
+                  <a class="btn btn-warning" href="{% url 'camp:edit_rule' %}">
+                    Edit</a>
                 </td>
                 <td>
-                  <a href="{% url 'camp:delete_rule' %}">
-                    <button type="button" class="btn btn-default">
-                      <span>Delete</span>
-                    </button>
-                  </a>
+                  <a class="btn btn-danger" href="{% url 'camp:delete_rule' rule.id %}">
+                    Delete</a>
               </tr>
               {% endfor %}
             </table>
