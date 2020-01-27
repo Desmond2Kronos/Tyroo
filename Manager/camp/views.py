@@ -46,7 +46,7 @@ def send_notification(subject):
     ['receiver.pawar@gmail.com'], fail_silently = False)
 
 
-
+#Not Working
 
 def criteria():
     qs = CampData.objects.all()
