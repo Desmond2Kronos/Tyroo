@@ -21,6 +21,7 @@
 <h6>For windown create a virtual environment</h6>
 <p><code>virtualenv ENV</code><p>
 <p><code>\path\to\env\Scripts\activate</code></p>
+<p><code>pip install -r requirements.txt</code>
 <p>cd to Manager directory with manage.py file<p>
 <p><code>python manage.py runserver</code></p>
 #Assignment
