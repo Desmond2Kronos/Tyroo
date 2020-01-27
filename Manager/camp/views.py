@@ -75,25 +75,33 @@ def criteria():
         subject = 'eCPI Low'
         send_notification(subject)
 
+@login_required
 def edit_rule(request, rule_name):
-    rule = request.POST.get(name = rule_name)
+    rule = request.objects.get(rule_name = rule_name)
+    print(rule)
     if request.method == 'POST':
-        campdata.rule_name = request.POST.get('rule_name')
-        campdata.campaigns = request.POST.get('campaign_name')
-        campdata.schedule_start = request.POST.get('schedule_start')
-        campdata.schedule_stop = request.POST.get('schedule_stop')
-        campdata.impressions = request.POST.get('impressions')
-        campdata.clicks = request.POST.get('clicks')
-        campdata.spend = request.POST.get('spend')
-        campdata.eCPM = request.POST.get('eCPM')
-        campdata.eCPC = request.POST.get('eCPC')
-        campdata.installs = request.POST.get('installs')
-        campdata.eCPI = request.POST.get('eCPI')
-        campdata.status = request.POST.get('status')
-        campdata.save()
+        rule.rule_name = request.POST.get('rule_name')
+        rule.campaigns = request.POST.get('campaign_name')
+        rule.schedule_start = request.POST.get('schedule_start')
+        rule.schedule_stop = request.POST.get('schedule_stop')
+        rule.impressions = request.POST.get('impressions')
+        rule.clicks = request.POST.get('clicks')
+        rule.spend = request.POST.get('spend')
+        rule.eCPM = request.POST.get('eCPM')
+        rule.eCPC = request.POST.get('eCPC')
+        rule.installs = request.POST.get('installs')
+        rule.eCPI = request.POST.get('eCPI')
+        rule.status = request.POST.get('status')
+        rule.save()
         return redirect('/')
     else:
         return render(request, 'add_rule.html', context)
+
+@login_required
+def delete_rule(request, rule_name):
+    rule = CampData.objects.get('rule_name')
+    rule.delete()
+    return redirect('/')
 
 @login_required
 def special(request):

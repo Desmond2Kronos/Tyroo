@@ -24,6 +24,7 @@
                 <th>eCPI</th>
                 <th>status</th>
                 <th>Edit</th>
+                <th>Delete</th>
               </tr>
               {% for rule in data %}
               <tr>
@@ -40,9 +41,16 @@
                 <td>{{rule.eCPI}}</td>
                 <td>{{rule.status}}</td>
                 <td>
-                  <a href="{% url 'camp:add_rule' %}">
+                  <a href="{% url 'camp:edit_rule' %}">
                     <button type="button" class="btn btn-default">
                       <span>Edit</span>
+                    </button>
+                  </a>
+                </td>
+                <td>
+                  <a href="{% url 'camp:delete_rule' %}">
+                    <button type="button" class="btn btn-default">
+                      <span>Delete</span>
                     </button>
                   </a>
               </tr>
