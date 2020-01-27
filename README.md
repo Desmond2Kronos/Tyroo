@@ -13,8 +13,16 @@
 
 <h4>I was not able to get the scheduler to work for the criteria(rules) given by the user.</h4>
 
+<p>Clone the repository: run command <code>git clone https://github.com/Desmond2Kronos/Tyroo.git</code></p>
+<p>To activate the virtual environment run command: <code>source env/bin/activate</code></p>
+<p>cd to Manager directory with manage.py file<p>
+<p><code>python manage.py runserver</code></p>
 
-
+<h6>For windown create a virtual environment</h6>
+<p><code>virtualenv ENV</code><p>
+<p><code>\path\to\env\Scripts\activate</code></p>
+<p>cd to Manager directory with manage.py file<p>
+<p><code>python manage.py runserver</code></p>
 #Assignment
 
 Managing campaigns using Rule Based Engine
